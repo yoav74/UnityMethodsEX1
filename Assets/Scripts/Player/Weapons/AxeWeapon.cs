@@ -1,31 +1,32 @@
 using UnityEngine;
 
-public class AxeWeapon : MonoBehaviour,IReloadWeapon
+/// <summary>
+/// Throws axe projectiles, consuming one axe from the player's <see cref="AxeAmmo"/>
+/// pool per shot. Single responsibility: firing. It does not track the ammo count
+/// itself (that is <see cref="AxeAmmo"/>) — it only asks to consume one.
+/// </summary>
+public class AxeWeapon : MonoBehaviour, IWeapon
 {
-    public GameObject projectile;
-    private bool _loaded = false;
+    [SerializeField] private GameObject projectile;
+    [SerializeField] private AxeAmmo ammo;
 
+    private void Awake()
+    {
+        if (ammo == null)
+            ammo = GetComponentInParent<AxeAmmo>();
+    }
 
     public void Attack()
     {
-        if (projectile != null && _loaded)
-        {
-            GameObject curProjectile = Instantiate(projectile, transform.position, new Quaternion(0, 0, 0, 0));
-            ProjectileAxe scProjectile =  curProjectile.GetComponent<ProjectileAxe>();
-            if(scProjectile != null)
-            {
-                float direction = 1;
-                if(transform.parent != null)
-                    direction = transform.parent.localScale.x;
-                scProjectile.Attack(direction);
-            }
-            _loaded = false;
-        }
-    }
+        if (projectile == null || ammo == null || !ammo.TryConsume(1))
+            return;
 
-    public void Reload()
-    {
-        Debug.Log("Reloading Axe"); 
-        _loaded = true;
+        GameObject curProjectile = Instantiate(projectile, transform.position, Quaternion.identity);
+        ProjectileAxe scProjectile = curProjectile.GetComponent<ProjectileAxe>();
+        if (scProjectile != null)
+        {
+            float direction = transform.parent != null ? transform.parent.localScale.x : 1f;
+            scProjectile.Attack(direction);
+        }
     }
 }
