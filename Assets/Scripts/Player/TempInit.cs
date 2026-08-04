@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class TempInit : MonoBehaviour
 {
@@ -17,15 +16,6 @@ public class TempInit : MonoBehaviour
                 weaponsHandler.AddWeapon(fireballWeapon);
             if(axeWeapon != null)
                 weaponsHandler.AddWeapon(axeWeapon);
-        }   
-    }
-
-    void Update()
-    {
-         if (Keyboard.current != null && axeWeapon != null)
-        {
-            if (Keyboard.current.qKey.isPressed)
-                axeWeapon.Reload();
         }
     }
 }
