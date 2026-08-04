@@ -5,10 +5,15 @@ using UnityEngine;
 /// pool per shot. Single responsibility: firing. It does not track the ammo count
 /// itself (that is <see cref="AxeAmmo"/>) — it only asks to consume one.
 /// </summary>
-public class AxeWeapon : MonoBehaviour, IWeapon
+public class AxeWeapon : MonoBehaviour, IWeapon, IWeaponInfo
 {
     [SerializeField] private GameObject projectile;
     [SerializeField] private AxeAmmo ammo;
+    [SerializeField] private string displayName = "Axe";
+    [SerializeField] private Sprite icon;
+
+    public string DisplayName => displayName;
+    public Sprite Icon => icon;
 
     private void Awake()
     {

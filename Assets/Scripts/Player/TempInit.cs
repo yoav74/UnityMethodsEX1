@@ -12,8 +12,7 @@ public class TempInit : MonoBehaviour
     {
         if(weaponsHandler != null)
         {
-            if(fireballWeapon != null)
-                weaponsHandler.AddWeapon(fireballWeapon);
+            // Player starts with the axe; the fireball is acquired via the FireFlower pickup.
             if(axeWeapon != null)
                 weaponsHandler.AddWeapon(axeWeapon);
         }

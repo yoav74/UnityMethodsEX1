@@ -1,15 +1,21 @@
 using UnityEngine;
 
-public class FireballWeapon : MonoBehaviour,IUseableWeapon
+public class FireballWeapon : MonoBehaviour, IUseableWeapon, IWeaponInfo
 {
     public GameObject projectile;
+    [SerializeField] private string displayName = "Fireball";
+    [SerializeField] private Sprite icon;
+
     private bool _isEquip = false;
+
+    public string DisplayName => displayName;
+    public Sprite Icon => icon;
 
     public void Attack()
     {
         if (projectile != null && _isEquip)
         {
-            GameObject curProjectile = Instantiate(projectile, transform.position, new Quaternion(0, 0, 0, 0));
+            GameObject curProjectile = Instantiate(projectile, transform.position, Quaternion.identity);
             ProjectileFireball scProjectile =  curProjectile.GetComponent<ProjectileFireball>();
             if(scProjectile != null)
             {

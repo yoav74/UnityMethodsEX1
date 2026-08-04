@@ -289,6 +289,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AxeWeapon
   projectile: {fileID: 6685130501241294565, guid: 3116b9b63743dbb498c72600f4e82794, type: 3}
   ammo: {fileID: 1188005397}
+  displayName: Axe
+  icon: {fileID: 21300000, guid: cee43561d65af00428bf9c5a279fd49d, type: 3}
 --- !u!1001 &61644637
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -430,6 +432,7 @@ GameObject:
   - component: {fileID: 72274834}
   - component: {fileID: 72274838}
   - component: {fileID: 72274839}
+  - component: {fileID: 72274840}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -515,6 +518,7 @@ RectTransform:
   m_Children:
   - {fileID: 1395678565}
   - {fileID: 1812554623}
+  - {fileID: 735369496}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -552,6 +556,21 @@ MonoBehaviour:
   axeAmmo: {fileID: 1188005397}
   label: {fileID: 1812554621}
   format: 'Axes: {0}'
+--- !u!114 &72274840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72274833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 834e8793a3fa7e5448cb1a6001722a33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponSelectorView
+  handler: {fileID: 1449836200}
+  slotPrefab: {fileID: 727848736542744233, guid: daacbe199335d5d4ba4ede7916364b18, type: 3}
+  slotContainer: {fileID: 735369496}
 --- !u!1001 &130739343
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1042,6 +1061,83 @@ Transform:
   - {fileID: 939950569}
   m_Father: {fileID: 1887416126}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &735369495
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 735369496}
+  - component: {fileID: 735369498}
+  - component: {fileID: 735369497}
+  m_Layer: 5
+  m_Name: WeaponSelector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &735369496
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735369495}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 72274837}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 32, y: -131.4}
+  m_SizeDelta: {x: -1682, y: 0}
+  m_Pivot: {x: 0, y: 1}
+--- !u!114 &735369497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735369495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
+--- !u!114 &735369498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735369495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.VerticalLayoutGroup
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &790316938
 GameObject:
   m_ObjectHideFlags: 0
@@ -1973,6 +2069,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1449836199}
   - component: {fileID: 1449836200}
+  - component: {fileID: 1449836201}
   m_Layer: 0
   m_Name: WeaponsHandler
   m_TagString: Untagged
@@ -2007,7 +2104,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2556d891a0b5bc24585c1e66a480495b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponsHandler
-  index: 1
+--- !u!114 &1449836201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1449836198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b57ccfe003c76c042960355bc8fe010e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponInput
+  handler: {fileID: 1449836200}
 --- !u!1001 &1505231679
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2562,6 +2671,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FireballWeapon
   projectile: {fileID: 6685130501241294565, guid: c470d5c61dda9e04e92dcb4b7f86bab8, type: 3}
+  displayName: Fireball
+  icon: {fileID: 21300000, guid: 8b61b5886f3b1ba429352e2460556baa, type: 3}
 --- !u!4 &2036172775 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5467311013064111145, guid: 7658296e42991b348a20b02c6e24bd34, type: 3}
