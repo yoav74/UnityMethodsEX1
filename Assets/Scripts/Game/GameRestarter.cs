@@ -4,14 +4,23 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// Restarts the game when the player runs out of lives. Single responsibility:
 /// reload the active scene in response to <see cref="PlayerLives.OnAllLivesLost"/>.
-/// Reloading gives every object a fresh start (lives reset to their starting value).
+/// It finds the player at runtime via <see cref="PlayerLocator"/> (by "Player" tag)
+/// rather than a wired reference, so it keeps working across scene reloads.
 /// </summary>
 public class GameRestarter : MonoBehaviour
 {
-    [SerializeField] private PlayerLives lives;
+    private PlayerLives lives;
+
+    private void Awake()
+    {
+        lives = PlayerLocator.FindComponent<PlayerLives>();
+    }
 
     private void OnEnable()
     {
+        if (lives == null)
+            lives = PlayerLocator.FindComponent<PlayerLives>();
+
         if (lives != null)
             lives.OnAllLivesLost += RestartGame;
     }

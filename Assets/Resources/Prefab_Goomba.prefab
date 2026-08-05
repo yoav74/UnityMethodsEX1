@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2348886480459846866}
   - component: {fileID: 268533316181908636}
   m_Layer: 0
-  m_Name: Sprite_Goomba
+  m_Name: Prefab_Goomba
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
