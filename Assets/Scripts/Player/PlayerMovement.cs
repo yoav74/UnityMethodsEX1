@@ -3,33 +3,43 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private float direction;
-    public float speed = 5;
+    [SerializeField] private float speed = 5f;
 
     private Rigidbody2D rigid;
-    void Awake()
+
+    private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
-      
     }
-    void FixedUpdate()
-    {
-        direction = 0f;
-        if (Keyboard.current != null)
-        {
-            if (Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed)
-                direction = -1f;
-            if (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
-                direction = 1f;
-        }
 
-        if (direction != 0 && rigid != null)
-        {
+    private void FixedUpdate()
+    {
+        float direction = ReadDirection();
+
+        // Drive horizontal velocity directly every step so the player walks only
+        // while a key is held and stops immediately on release (no leftover
+        // momentum / "push"). Vertical velocity is left to gravity and jumping.
+        if (rigid != null)
             rigid.linearVelocity = new Vector2(direction * speed, rigid.linearVelocity.y);
 
-            if (direction > 0)
-                transform.localScale = new Vector3(1, 1, 1);
-            else transform.localScale = new Vector3(-1, 1, 1);
-        }
+        if (direction > 0f)
+            transform.localScale = new Vector3(1, 1, 1);
+        else if (direction < 0f)
+            transform.localScale = new Vector3(-1, 1, 1);
+    }
+
+    private float ReadDirection()
+    {
+        Keyboard kb = Keyboard.current;
+        if (kb == null)
+            return 0f;
+
+        float direction = 0f;
+        if (kb.aKey.isPressed || kb.leftArrowKey.isPressed)
+            direction -= 1f;
+        if (kb.dKey.isPressed || kb.rightArrowKey.isPressed)
+            direction += 1f;
+
+        return direction;
     }
 }

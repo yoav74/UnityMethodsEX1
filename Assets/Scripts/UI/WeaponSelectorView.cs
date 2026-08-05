@@ -4,19 +4,28 @@ using UnityEngine;
 /// <summary>
 /// Displays the player's acquired weapons as a vertical list of icon + name slots
 /// and keeps the selected one highlighted. Single responsibility: build and refresh
-/// the slot list from the <see cref="WeaponsHandler"/> model (event-driven); each
-/// <see cref="WeaponSlotView"/> renders itself.
+/// the slot list from the player's <see cref="WeaponsHandler"/>. It finds the player
+/// at runtime via <see cref="PlayerLocator"/> (by "Player" tag) rather than a wired
+/// reference; each <see cref="WeaponSlotView"/> renders itself.
 /// </summary>
 public class WeaponSelectorView : MonoBehaviour
 {
-    [SerializeField] private WeaponsHandler handler;
     [SerializeField] private WeaponSlotView slotPrefab;
     [SerializeField] private Transform slotContainer;
 
+    private WeaponsHandler handler;
     private readonly List<WeaponSlotView> slots = new List<WeaponSlotView>();
+
+    private void Awake()
+    {
+        handler = PlayerLocator.FindComponent<WeaponsHandler>();
+    }
 
     private void OnEnable()
     {
+        if (handler == null)
+            handler = PlayerLocator.FindComponent<WeaponsHandler>();
+
         if (handler == null)
             return;
 

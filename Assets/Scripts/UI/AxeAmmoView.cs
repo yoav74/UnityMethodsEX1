@@ -2,13 +2,12 @@ using TMPro;
 using UnityEngine;
 
 /// <summary>
-/// The axe-ammo "view": single responsibility is to display the axe count.
-/// It depends on the <see cref="IAmmoCounter"/> abstraction (Dependency Inversion)
-/// and gets its references through the inspector instead of GameObject.Find.
+/// The axe-ammo "view": single responsibility is to display the axe count. It
+/// finds the player's <see cref="AxeAmmo"/> at runtime via <see cref="PlayerLocator"/>
+/// (by "Player" tag) and depends on the <see cref="IAmmoCounter"/> abstraction.
 /// </summary>
 public class AxeAmmoView : MonoBehaviour
 {
-    [SerializeField] private AxeAmmo axeAmmo;
     [SerializeField] private TextMeshProUGUI label;
     [SerializeField] private string format = "Axes: {0}";
 
@@ -16,16 +15,19 @@ public class AxeAmmoView : MonoBehaviour
 
     private void Awake()
     {
-        counter = axeAmmo;
+        counter = PlayerLocator.FindComponent<AxeAmmo>();
     }
 
     private void OnEnable()
     {
         if (counter == null)
+            counter = PlayerLocator.FindComponent<AxeAmmo>();
+
+        if (counter == null)
             return;
 
         counter.OnAmmoChanged += Render;
-        Render(counter.Count); // show the correct value immediately
+        Render(counter.Count);
     }
 
     private void OnDisable()
@@ -36,6 +38,7 @@ public class AxeAmmoView : MonoBehaviour
 
     private void Render(int count)
     {
-        label.text = string.Format(format, count);
+        if (label != null)
+            label.text = string.Format(format, count);
     }
 }
