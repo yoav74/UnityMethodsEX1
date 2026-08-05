@@ -1203,7 +1203,7 @@ GameObject:
   - component: {fileID: 511102768}
   - component: {fileID: 511102769}
   m_Layer: 0
-  m_Name: TestBaseWeapon
+  m_Name: GameRestarter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1233,9 +1233,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 511102767}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb79da5b587ce244f8b2d2769baf812e, type: 3}
+  m_Script: {fileID: 11500000, guid: 0abb51de44301424ca7c821674b660dc, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TestBaseWeapon
+  m_EditorClassIdentifier: Assembly-CSharp::GameRestarter
+  lives: {fileID: 1188005398}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2329,6 +2330,7 @@ GameObject:
   - component: {fileID: 1188005395}
   - component: {fileID: 1188005396}
   - component: {fileID: 1188005397}
+  - component: {fileID: 1188005398}
   m_Layer: 0
   m_Name: Sprite_Mario
   m_TagString: Player
@@ -2515,6 +2517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a333964a36952d46916dfb7022eb90a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDeath
+  lives: {fileID: 1188005398}
 --- !u!114 &1188005396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2540,6 +2543,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AxeAmmo
   startingCount: 20
+--- !u!114 &1188005398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188005387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6915e2bebe1594498588dc7e380c72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerLives
+  startingLives: 3
 --- !u!1001 &1207572032
 PrefabInstance:
   m_ObjectHideFlags: 0
