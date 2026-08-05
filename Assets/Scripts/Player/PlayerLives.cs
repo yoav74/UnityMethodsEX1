@@ -11,8 +11,14 @@ public class PlayerLives : MonoBehaviour
 {
     [SerializeField] private int startingLives = 3;
     [SerializeField] private int maxLives = 0; // 0 or less = no cap
+    [SerializeField] private float invulnerabilityDuration = 0.75f;
+
+    private float invulnerableUntil;
 
     public int Lives { get; private set; }
+
+    /// <summary>True during the brief mercy window after losing a life.</summary>
+    public bool IsInvulnerable => Time.time < invulnerableUntil;
 
     /// <summary>Raised whenever the life count changes, passing the new total.</summary>
     public event Action<int> OnLivesChanged;
@@ -27,8 +33,12 @@ public class PlayerLives : MonoBehaviour
 
     public void LoseLife()
     {
-        if (Lives <= 0)
+        // Ignore repeated/simultaneous hits during the invulnerability window so a
+        // single death (e.g. landing across two spike colliders) only costs one life.
+        if (Lives <= 0 || IsInvulnerable)
             return;
+
+        invulnerableUntil = Time.time + invulnerabilityDuration;
 
         Lives--;
         OnLivesChanged?.Invoke(Lives);
