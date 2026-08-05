@@ -10,6 +10,7 @@ using UnityEngine;
 public class PlayerLives : MonoBehaviour
 {
     [SerializeField] private int startingLives = 3;
+    [SerializeField] private int maxLives = 0; // 0 or less = no cap
 
     public int Lives { get; private set; }
 
@@ -34,5 +35,22 @@ public class PlayerLives : MonoBehaviour
 
         if (Lives <= 0)
             OnAllLivesLost?.Invoke();
+    }
+
+    /// <summary>Adds lives, e.g. when a life pickup is collected (respects the cap, if any).</summary>
+    public void AddLife(int amount = 1)
+    {
+        if (amount <= 0)
+            return;
+
+        int newValue = Lives + amount;
+        if (maxLives > 0)
+            newValue = Mathf.Min(newValue, maxLives);
+
+        if (newValue == Lives)
+            return;
+
+        Lives = newValue;
+        OnLivesChanged?.Invoke(Lives);
     }
 }
