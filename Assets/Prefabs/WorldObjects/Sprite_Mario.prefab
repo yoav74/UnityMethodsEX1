@@ -171,6 +171,7 @@ GameObject:
   - component: {fileID: 3638897418993905708}
   - component: {fileID: 2840289424160957743}
   - component: {fileID: 537328154138550025}
+  - component: {fileID: 5588449845182145317}
   m_Layer: 0
   m_Name: Sprite_Mario
   m_TagString: Player
@@ -399,6 +400,18 @@ MonoBehaviour:
   startingLives: 3
   maxLives: 0
   invulnerabilityDuration: 0.2
+--- !u!114 &5588449845182145317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6196069065303676474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5741f86f49d27c64a94e4350545a8174, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerKeys
 --- !u!1 &7227014048283096440
 GameObject:
   m_ObjectHideFlags: 0
