@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ce6be447820d8340b7a024ca08914d3, type: 3}
+  m_Name: MainTilePallete
+  m_EditorClassIdentifier: Assembly-CSharp::LevelTilePalette
+  tiles:
+  - id: 1
+    prefab: {fileID: 5467311013064111151, guid: 7658296e42991b348a20b02c6e24bd34, type: 3}
+  - id: 2
+    prefab: {fileID: 1409188683888031049, guid: 451bbf7aadf81d34196e73863fcb9afa, type: 3}
+  - id: 3
+    prefab: {fileID: 4174350334874458473, guid: 1b27af80384a67e499670d47d314c703, type: 3}
+  - id: 4
+    prefab: {fileID: 2303736705558524048, guid: ab419e5e6025bac4690e06c8abfdcaad, type: 3}
+  - id: 5
+    prefab: {fileID: 5467311013064111151, guid: 7658296e42991b348a20b02c6e24bd34, type: 3}
+  - id: 6
+    prefab: {fileID: 6196069065303676474, guid: 144dfacfdca4b3a4486246fd7bade5a3, type: 3}
+  - id: 12
+    prefab: {fileID: 5348733181303246671, guid: c240a6889217c354899eb7e91f14bb78, type: 3}
+  - id: 13
+    prefab: {fileID: 5061773358370772919, guid: afe02e74d32cc0d448191f6a986b449d, type: 3}
+  - id: 15
+    prefab: {fileID: 1808809011753949353, guid: f96272c6140ab1c459e87b421d46cd9c, type: 3}
+  - id: 16
+    prefab: {fileID: 2107668036766718279, guid: e0c658cd7266d4b429e7f252aa7326b4, type: 3}
+  - id: 17
+    prefab: {fileID: 1548214559023109552, guid: 6e89bd49b4ad1fe4db7766a6fa2c45ae, type: 3}
+  - id: 1
+    prefab: {fileID: 0}
