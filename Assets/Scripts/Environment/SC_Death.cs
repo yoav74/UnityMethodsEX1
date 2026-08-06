@@ -1,33 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
+/// <summary>
+/// A spike hazard. Raises a static event when the player touches it; PlayerDeath
+/// reacts to that to cost a life and respawn.
+/// </summary>
 public class SC_Death : MonoBehaviour
 {
     public delegate void SpikeCollisionHandler();
     public static event SpikeCollisionHandler OnSpikeCollision;
 
-    public delegate void SpikeCollisionGeneralHandler(GameObject _Collied);
-    public static event SpikeCollisionGeneralHandler OnSpikeCollisionGeneral;
-
-
-    void OnCollisionEnter2D(Collision2D col)
+    private void OnCollisionEnter2D(Collision2D col)
     {
-        Debug.Log("OnCollisionEnter2D " + col.gameObject.name);
-        if(col.gameObject.tag == "Player")
-        {
-            Debug.Log("Mario Collision!");
-            //if(col.gameObject.GetComponent<SC_Player>() != null)
-            //    col.gameObject.GetComponent<SC_Player>().ResetMarioPosition();
-
-            if (OnSpikeCollision != null)
-                OnSpikeCollision();
-        }
-        else
-        {
-            if (OnSpikeCollisionGeneral != null)
-                OnSpikeCollisionGeneral(col.gameObject);
-        }
+        if (col.gameObject.CompareTag("Player"))
+            OnSpikeCollision?.Invoke();
     }
 }
