@@ -1,16 +1,24 @@
 using UnityEngine;
 
+/// <summary>
+/// A world pickup that grants the fireball power-up. Single responsibility: detect
+/// the player and hand off the effect through the existing PlayerPowerUp flow,
+/// then remove itself.
+/// </summary>
+[RequireComponent(typeof(Collider2D))]
 public class FireFlowerController : MonoBehaviour
 {
+    [SerializeField] private string playerTag = "Player";
 
-    void OnTriggerEnter2D(Collider2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log("OnCollisionEnter2D " + col.gameObject.name);
-        if (col.gameObject.tag == "Player")
-        {
-            Debug.Log("Mario Collision!");
-            this.gameObject.SetActive(false);
-            col.gameObject.GetComponent<PlayerPowerUp>().CollectPowerUp(new FireFlowerPowerUp());
-        }
+        if (!col.CompareTag(playerTag))
+            return;
+
+        PlayerPowerUp playerPowerUp = col.GetComponent<PlayerPowerUp>();
+        if (playerPowerUp != null)
+            playerPowerUp.CollectPowerUp(new FireFlowerPowerUp());
+
+        gameObject.SetActive(false);
     }
 }
