@@ -204,8 +204,8 @@ MonoBehaviour:
   rightFirePoint: {fileID: 1262470074381029006}
   fireDirection: {x: -1, y: 0}
   projectileSpeed: 6
-  minInterval: 1
-  maxInterval: 2
+  minInterval: 1.5
+  maxInterval: 3
 --- !u!1 &2392411957825548209
 GameObject:
   m_ObjectHideFlags: 0
