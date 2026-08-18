@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer sprite;
     private Color originalColor = Color.white;
     private float speedMultiplier = 1f;
+    private float platformVelocityX; // added by a moving platform the player rides
     private Coroutine boostRoutine;
 
     private void Awake()
@@ -26,9 +27,10 @@ public class PlayerMovement : MonoBehaviour
         float direction = ReadDirection();
 
         // Drive horizontal velocity directly every step so the player walks only
-        // while a key is held and stops immediately on release (no leftover momentum).
+        // while a key is held and stops immediately on release. A ridden moving
+        // platform adds its own velocity so the player is carried along.
         if (rigid != null)
-            rigid.linearVelocity = new Vector2(direction * speed * speedMultiplier, rigid.linearVelocity.y);
+            rigid.linearVelocity = new Vector2(direction * speed * speedMultiplier + platformVelocityX, rigid.linearVelocity.y);
 
         if (direction > 0f)
             transform.localScale = new Vector3(1, 1, 1);
@@ -46,6 +48,15 @@ public class PlayerMovement : MonoBehaviour
             StopCoroutine(boostRoutine);
 
         boostRoutine = StartCoroutine(SpeedBoostRoutine(multiplier, duration));
+    }
+
+    /// <summary>
+    /// Horizontal velocity added by a moving platform the player is standing on
+    /// (0 when not riding one). Set by <see cref="MovingPlatform"/>.
+    /// </summary>
+    public void SetPlatformVelocity(float velocityX)
+    {
+        platformVelocityX = velocityX;
     }
 
     private IEnumerator SpeedBoostRoutine(float multiplier, float duration)
