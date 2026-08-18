@@ -1,10 +1,11 @@
 using UnityEngine;
 
 /// <summary>
-/// Handles the player dying: costs a life and respawns the player at its start
-/// position while lives remain. When the last life is lost it does not respawn —
-/// <see cref="GameRestarter"/> reacts to that instead. Both spikes and enemies
-/// route through <see cref="Die"/>, so every death is handled the same way.
+/// MVC **Controller** for taking damage. Turns death events (spikes, enemies) into
+/// a <see cref="PlayerLives.LoseLife"/> call on the model, and respawns the player
+/// at its start position while lives remain. When the last life is lost it does not
+/// respawn — <see cref="GameRestarter"/> reacts to that instead. Both spikes and
+/// enemies route through <see cref="Die"/>, so every death is handled the same way.
 /// </summary>
 public class PlayerDeath : MonoBehaviour
 {

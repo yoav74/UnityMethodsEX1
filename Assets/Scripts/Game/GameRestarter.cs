@@ -2,10 +2,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// Restarts the game when the player runs out of lives. Single responsibility:
-/// reload the active scene in response to <see cref="PlayerLives.OnAllLivesLost"/>.
-/// It finds the player at runtime via <see cref="PlayerLocator"/> (by "Player" tag)
-/// rather than a wired reference, so it keeps working across scene reloads.
+/// MVC **Controller** for the restart. Reloads the active scene when the model
+/// (<see cref="PlayerLives"/>) raises <see cref="PlayerLives.OnAllLivesLost"/> —
+/// reloading resets every object to its initial state, so no bespoke reset logic is
+/// needed. It finds the player at runtime via <see cref="PlayerLocator"/> (by
+/// "Player" tag) rather than a wired reference, so it keeps working across reloads.
 /// </summary>
 public class GameRestarter : MonoBehaviour
 {
