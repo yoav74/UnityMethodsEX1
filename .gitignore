@@ -106,3 +106,8 @@ InitTestScene*.unity*
 /[Aa]ssets/[Ss]ceneDependencyCache*
 # Tiled source project (the Unity-imported copy lives in Assets/Tiled)
 /Tiled/
+
+# Local submission artifacts (recordings, archives) - not versioned
+*.mkv
+*.rar
+/*.txt
