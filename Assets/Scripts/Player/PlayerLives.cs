@@ -2,10 +2,15 @@ using System;
 using UnityEngine;
 
 /// <summary>
-/// Model of the player's remaining lives. Single responsibility: track the life
-/// count and announce when it changes or reaches zero. It does not respawn the
-/// player or reload the scene — those are separate reactors (PlayerDeath /
-/// GameRestarter) that subscribe to its events.
+/// MVC **Model** for the player's health / lives. Single responsibility: hold the
+/// count and its rules (max cap, invulnerability window) and announce changes via
+/// events — it has no UI and reads no input.
+///
+/// The health feature follows MVC:
+///   • Model      — this class (<see cref="PlayerLives"/>)
+///   • View       — <see cref="PlayerLivesView"/> (renders the count)
+///   • Controllers— <see cref="PlayerDeath"/> (damage), the life pickups (heal),
+///                  and <see cref="GameRestarter"/> (restart on 0)
 /// </summary>
 public class PlayerLives : MonoBehaviour
 {

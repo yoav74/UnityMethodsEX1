@@ -2,10 +2,10 @@ using TMPro;
 using UnityEngine;
 
 /// <summary>
-/// HUD view for the player's remaining lives. Single responsibility: display the
-/// life count. It finds the player at runtime via <see cref="PlayerLocator"/>
-/// (by "Player" tag) rather than a wired reference, then depends on
-/// <see cref="PlayerLives.OnLivesChanged"/>.
+/// MVC **View** for the player's health / lives. Single responsibility: display the
+/// count. It observes the model via <see cref="PlayerLives.OnLivesChanged"/> and
+/// holds no logic. It finds the player at runtime via <see cref="PlayerLocator"/>
+/// (by "Player" tag) rather than a wired reference.
 /// </summary>
 public class PlayerLivesView : MonoBehaviour
 {
