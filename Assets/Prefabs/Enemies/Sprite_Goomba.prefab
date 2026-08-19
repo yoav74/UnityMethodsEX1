@@ -197,6 +197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyPatrol
   speed: 2
   patrolDistance: 3
+  stuckTime: 2
 --- !u!114 &268533316181908636
 MonoBehaviour:
   m_ObjectHideFlags: 0
