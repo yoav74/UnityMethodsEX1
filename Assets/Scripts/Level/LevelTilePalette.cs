@@ -20,6 +20,9 @@ public class LevelTilePalette : ScriptableObject
 
     [SerializeField] private List<TileEntry> tiles = new List<TileEntry>();
 
+    /// <summary>All tile entries (id + prefab) in the palette, read-only.</summary>
+    public IReadOnlyList<TileEntry> Tiles => tiles;
+
     /// <summary>Returns the prefab mapped to <paramref name="id"/>, or null if none.</summary>
     public GameObject GetPrefab(int id)
     {
