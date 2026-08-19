@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5467311013064111144}
   - component: {fileID: 2093751782}
   - component: {fileID: 3976833943669629806}
+  - component: {fileID: 8432488070782464344}
   m_Layer: 0
   m_Name: Sprite_BlinkingFloor
   m_TagString: Untagged
@@ -154,3 +155,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BlinkingTile
   visibleTime: 2
   hiddenTime: 2
+--- !u!114 &8432488070782464344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5467311013064111151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6769a8f6931bdb6469e7d795d12462d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SC_Floor
