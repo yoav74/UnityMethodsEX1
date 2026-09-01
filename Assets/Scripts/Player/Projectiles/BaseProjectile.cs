@@ -7,6 +7,9 @@ using UnityEngine;
 /// individual steps through the protected hooks. Subclasses never override
 /// <see cref="Fire"/> itself, so every projectile fires through the same sequence and a
 /// new projectile type is added by extension, not by changing this class (Open/Closed).
+///
+/// A projectile can belong to an <see cref="IProjectilePool"/>: when spent it returns
+/// itself to the pool via <see cref="Despawn"/>, or destroys itself if it has no pool.
 /// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class BaseProjectile : MonoBehaviour
@@ -15,10 +18,17 @@ public abstract class BaseProjectile : MonoBehaviour
     [SerializeField] protected float lifetime = 3f;
 
     protected Rigidbody2D body;
+    private IProjectilePool _pool;
 
     protected virtual void Awake()
     {
         body = GetComponent<Rigidbody2D>();
+    }
+
+    /// <summary>Assigns the pool this projectile returns to when spent (set by the pool).</summary>
+    public void SetPool(IProjectilePool pool)
+    {
+        _pool = pool;
     }
 
     /// <summary>
@@ -46,12 +56,29 @@ public abstract class BaseProjectile : MonoBehaviour
         lifetime = projectileLifetime;
     }
 
+    /// <summary>
+    /// Remove the projectile from play: return it to its pool if it has one, otherwise
+    /// destroy it. Called on hit (by <c>DamageOnHit</c>) and when the lifetime elapses.
+    /// </summary>
+    public void Despawn()
+    {
+        CancelInvoke(nameof(Despawn));
+
+        if (_pool != null)
+            _pool.Return(this);
+        else
+            Destroy(gameObject);
+    }
+
     /// <summary>Map the requested aim to the actual travel direction. Default: use it as-is.</summary>
     protected virtual Vector2 ResolveDirection(Vector2 aim) => aim;
 
-    /// <summary>Reset/orient the projectile just before launch. Default: clear velocity.</summary>
+    /// <summary>Reset/orient the projectile just before launch. Default: clear velocity and
+    /// any pending despawn (so a reused, pooled projectile starts fresh).</summary>
     protected virtual void Prepare(Vector2 direction)
     {
+        CancelInvoke(nameof(Despawn));
+
         if (body != null)
             body.linearVelocity = Vector2.zero;
     }
@@ -66,11 +93,11 @@ public abstract class BaseProjectile : MonoBehaviour
             body.linearVelocity = direction.normalized * speed;
     }
 
-    /// <summary>Schedule self-despawn. Default: destroy after <see cref="lifetime"/> (≤0 = never).</summary>
+    /// <summary>Schedule the despawn after <see cref="lifetime"/> seconds (≤0 = never).</summary>
     protected virtual void ScheduleDespawn()
     {
         if (lifetime > 0f)
-            Destroy(gameObject, lifetime);
+            Invoke(nameof(Despawn), lifetime);
     }
 
     /// <summary>Post-fire hook (spin, logging, etc.). Default: nothing.</summary>
