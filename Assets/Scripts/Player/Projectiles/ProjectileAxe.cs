@@ -1,34 +1,39 @@
 using UnityEngine;
 
-public class ProjectileAxe : MonoBehaviour
+/// <summary>
+/// The axe projectile: thrown in an arc in the direction it is fired and tumbling while
+/// in flight. Inherits the shared firing sequence from <see cref="BaseProjectile"/> and
+/// customises the facing, the arced launch impulse, and the spin.
+/// </summary>
+public class ProjectileAxe : BaseProjectile
 {
-    public float speedX = 5f;
-    public float speedY = 5f;
-    public float lifetime = 3f;
+    [SerializeField] private float speedX = 5f;
+    [SerializeField] private float speedY = 5f;
     [SerializeField] private float rotationSpeed = 720f; // degrees per second
 
-    private Rigidbody2D rb;
     private float spinDirection = -1f;
     private bool thrown;
 
-    void Awake()
+    protected override void Prepare(Vector2 direction)
     {
-        rb = GetComponent<Rigidbody2D>();
+        base.Prepare(direction);
+        float facing = Mathf.Sign(direction.x);
+        transform.localScale = new Vector3(facing, 1f, 1f);
+        spinDirection = -facing; // tumble in the direction of travel
     }
 
-    public void Attack(float direction)
+    protected override void Launch(Vector2 direction)
     {
-        if(rb != null)
-        {
-            transform.localScale = new Vector3(direction, 1, 1);
-            spinDirection = -Mathf.Sign(direction); // tumble in the direction of travel
-            rb.AddForce(new Vector2(direction * speedX, speedY));
-            Destroy(gameObject, lifetime);
-            thrown = true;
-        }
+        if (body != null)
+            body.AddForce(new Vector2(Mathf.Sign(direction.x) * speedX, speedY));
     }
 
-    void Update()
+    protected override void OnFired(Vector2 direction)
+    {
+        thrown = true;
+    }
+
+    private void Update()
     {
         if (thrown)
             transform.Rotate(0f, 0f, spinDirection * rotationSpeed * Time.deltaTime);

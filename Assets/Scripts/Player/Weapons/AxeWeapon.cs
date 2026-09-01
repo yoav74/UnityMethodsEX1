@@ -31,7 +31,7 @@ public class AxeWeapon : MonoBehaviour, IWeapon, IWeaponInfo
         if (scProjectile != null)
         {
             float direction = transform.parent != null ? transform.parent.localScale.x : 1f;
-            scProjectile.Attack(direction);
+            scProjectile.Fire(new Vector2(direction, 0f));
         }
     }
 }
