@@ -13,6 +13,8 @@ public class DamageOnHit : MonoBehaviour
 
     private bool hasHit;
 
+    private void OnEnable() => hasHit = false; // reset each spawn so a pooled projectile can hit again
+
     private void OnCollisionEnter2D(Collision2D collision) => TryHit(collision.collider);
 
     private void OnTriggerEnter2D(Collider2D other) => TryHit(other);
@@ -30,6 +32,16 @@ public class DamageOnHit : MonoBehaviour
         damageable.TakeDamage(damage);
 
         if (destroyOnHit)
+            Despawn();
+    }
+
+    /// <summary>Return the projectile to its pool if it is pooled, otherwise destroy it.</summary>
+    private void Despawn()
+    {
+        BaseProjectile projectile = GetComponent<BaseProjectile>();
+        if (projectile != null)
+            projectile.Despawn();
+        else
             Destroy(gameObject);
     }
 }

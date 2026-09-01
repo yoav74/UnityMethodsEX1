@@ -17,6 +17,8 @@ public class ProjectileAxe : BaseProjectile
     protected override void Prepare(Vector2 direction)
     {
         base.Prepare(direction);
+        thrown = false;
+        transform.rotation = Quaternion.identity; // reset spin for a reused (pooled) axe
         float facing = Mathf.Sign(direction.x);
         transform.localScale = new Vector3(facing, 1f, 1f);
         spinDirection = -facing; // tumble in the direction of travel
