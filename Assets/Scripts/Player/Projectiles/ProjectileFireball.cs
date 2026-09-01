@@ -1,24 +1,22 @@
 using UnityEngine;
 
-public class ProjectileFireball : MonoBehaviour
+/// <summary>
+/// The fireball projectile: flies horizontally in the direction it is fired. Inherits
+/// the shared firing sequence from <see cref="BaseProjectile"/> and customises only the
+/// facing and the horizontal launch impulse.
+/// </summary>
+public class ProjectileFireball : BaseProjectile
 {
-    public float speed = 5f;
-    public float lifetime = 3f; 
-
-    private Rigidbody2D rb;
-
-    void Awake()
+    protected override void Prepare(Vector2 direction)
     {
-        rb = GetComponent<Rigidbody2D>();
+        base.Prepare(direction);
+        float facing = Mathf.Sign(direction.x);
+        transform.localScale = new Vector3(facing, 1f, 1f);
     }
 
-    public void Attack(float direction)
+    protected override void Launch(Vector2 direction)
     {
-        if(rb != null)
-        {
-            transform.localScale = new Vector3(direction, 1, 1);
-            rb.AddForce(new Vector2(direction * speed, 0));
-            Destroy(gameObject, lifetime);
-        }
+        if (body != null)
+            body.AddForce(new Vector2(Mathf.Sign(direction.x) * speed, 0f));
     }
 }

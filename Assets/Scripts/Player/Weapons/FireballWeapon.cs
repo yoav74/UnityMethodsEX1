@@ -22,7 +22,7 @@ public class FireballWeapon : MonoBehaviour, IUseableWeapon, IWeaponInfo
                 float direction = 1;
                 if(transform.parent != null)
                     direction = transform.parent.localScale.x;
-                scProjectile.Attack(direction);
+                scProjectile.Fire(new Vector2(direction, 0f));
             }
         }
     }
