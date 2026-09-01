@@ -8,6 +8,9 @@ using UnityEngine;
 /// </summary>
 public class PlayerLoadout : MonoBehaviour
 {
+    [Tooltip("TEMP (for testing before the Laser pickup exists): also grant the laser at start.")]
+    [SerializeField] private bool grantLaserOnStart;
+
     private void Start()
     {
         GameObject player = PlayerLocator.Find();
@@ -15,9 +18,18 @@ public class PlayerLoadout : MonoBehaviour
             return;
 
         WeaponsHandler handler = player.GetComponentInChildren<WeaponsHandler>(true);
-        AxeWeapon axe = player.GetComponentInChildren<AxeWeapon>(true);
+        if (handler == null)
+            return;
 
-        if (handler != null && axe != null)
+        AxeWeapon axe = player.GetComponentInChildren<AxeWeapon>(true);
+        if (axe != null)
             handler.AddWeapon(axe);
+
+        if (grantLaserOnStart)
+        {
+            LaserWeapon laser = player.GetComponentInChildren<LaserWeapon>(true);
+            if (laser != null)
+                handler.AddWeapon(laser);
+        }
     }
 }
