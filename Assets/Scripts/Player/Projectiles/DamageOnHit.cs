@@ -30,6 +30,7 @@ public class DamageOnHit : MonoBehaviour
 
         hasHit = true;
         damageable.TakeDamage(damage);
+        Debug.Log($"{name} hit {other.name} for {damage} damage");
 
         if (destroyOnHit)
             Despawn();

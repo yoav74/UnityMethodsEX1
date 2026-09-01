@@ -9,10 +9,17 @@ public class ProjectileAxe : BaseProjectile
 {
     [SerializeField] private float speedX = 5f;
     [SerializeField] private float speedY = 5f;
+    [SerializeField] private float axeLifetime = 3f;
     [SerializeField] private float rotationSpeed = 720f; // degrees per second
 
     private float spinDirection = -1f;
     private bool thrown;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        Configure(speed, axeLifetime); // the axe uses speedX/speedY for motion; only its lifetime feeds the base
+    }
 
     protected override void Prepare(Vector2 direction)
     {

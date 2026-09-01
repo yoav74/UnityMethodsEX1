@@ -14,8 +14,11 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class BaseProjectile : MonoBehaviour
 {
-    [SerializeField] protected float speed = 10f;
-    [SerializeField] protected float lifetime = 3f;
+    // Motion params — not serialized. They are set through Configure: by the pool/builder
+    // for the laser, or by the concrete projectile in Awake for the fireball/axe. This
+    // keeps meaningless, overwritten fields off the pool-built laser's Inspector.
+    protected float speed = 10f;
+    protected float lifetime = 3f;
 
     protected Rigidbody2D body;
     private IProjectilePool _pool;

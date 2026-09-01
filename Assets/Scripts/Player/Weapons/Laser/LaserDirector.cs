@@ -1,8 +1,8 @@
 /// <summary>
-/// <b>Director</b> for the Builder pattern: drives a <see cref="LaserBuilder"/> through a
-/// fixed recipe so callers get a consistent, standard laser bolt without repeating the
-/// individual build steps. Swapping in a different recipe (e.g. a faster laser) is a
-/// change here, not in every call site.
+/// <b>Director</b> for the Builder pattern: drives a <see cref="LaserBuilder"/> through the
+/// fixed construction sequence (speed → lifetime → size → build) using the values it is
+/// given, so callers get a consistently-assembled bolt without repeating the steps. The
+/// values themselves come from the pool, so they can be tuned in the Inspector.
 /// </summary>
 public class LaserDirector
 {
@@ -13,13 +13,13 @@ public class LaserDirector
         _builder = builder;
     }
 
-    /// <summary>Assembles the standard laser bolt, step by step, through the builder.</summary>
-    public LaserProjectile BuildStandardLaser()
+    /// <summary>Assembles a laser bolt, step by step, from the given values.</summary>
+    public LaserProjectile Build(float speed, float lifetime, float size)
     {
         return _builder
-            .SetSpeed(14f)
-            .SetLifetime(2f)
-            .SetSize(1f)
+            .SetSpeed(speed)
+            .SetLifetime(lifetime)
+            .SetSize(size)
             .Build();
     }
 }
