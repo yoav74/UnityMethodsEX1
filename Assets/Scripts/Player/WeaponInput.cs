@@ -54,8 +54,8 @@ public class WeaponInput : MonoBehaviour
 
         float scroll = mouse.scroll.ReadValue().y;
         if (scroll > 0f)
-            handler.SelectNext();
+            handler.SelectPrevious(); // scroll up -> previous (up the list)
         else if (scroll < 0f)
-            handler.SelectPrevious();
+            handler.SelectNext();     // scroll down -> next (down the list)
     }
 }

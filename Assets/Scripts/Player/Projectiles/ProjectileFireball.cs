@@ -7,6 +7,15 @@ using UnityEngine;
 /// </summary>
 public class ProjectileFireball : BaseProjectile
 {
+    [SerializeField] private float fireballSpeed = 300f;
+    [SerializeField] private float fireballLifetime = 3f;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        Configure(fireballSpeed, fireballLifetime);
+    }
+
     protected override void Prepare(Vector2 direction)
     {
         base.Prepare(direction);
