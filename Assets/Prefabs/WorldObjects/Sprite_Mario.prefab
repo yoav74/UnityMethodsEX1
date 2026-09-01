@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FireballWeapon
   projectile: {fileID: 6685130501241294565, guid: c470d5c61dda9e04e92dcb4b7f86bab8, type: 3}
+  pool: {fileID: 0}
   displayName: Fireball
   icon: {fileID: 21300000, guid: 8b61b5886f3b1ba429352e2460556baa, type: 3}
 --- !u!1 &668722476187933526
@@ -150,6 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AxeWeapon
   projectile: {fileID: 6685130501241294565, guid: 3116b9b63743dbb498c72600f4e82794, type: 3}
+  pool: {fileID: 0}
   ammo: {fileID: 2840289424160957743}
   displayName: Axe
   icon: {fileID: 21300000, guid: cee43561d65af00428bf9c5a279fd49d, type: 3}
@@ -196,6 +198,7 @@ Transform:
   - {fileID: 269282077061992190}
   - {fileID: 5294459998748693261}
   - {fileID: 8252036981124414076}
+  - {fileID: 7737605164794918025}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6492307085193462810
@@ -334,6 +337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   speed: 5
+  boostColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &1232793493495922935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,6 +351,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerJump
   jumpSpeed: 500
+  maxJumps: 2
+  groundCheckDistance: 0.15
 --- !u!114 &6739469287057136527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -412,6 +418,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5741f86f49d27c64a94e4350545a8174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerKeys
+--- !u!1 &6218923949336518032
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7737605164794918025}
+  m_Layer: 0
+  m_Name: LaserWeapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7737605164794918025
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6218923949336518032}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.36, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5362598858629663507}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7227014048283096440
 GameObject:
   m_ObjectHideFlags: 0
