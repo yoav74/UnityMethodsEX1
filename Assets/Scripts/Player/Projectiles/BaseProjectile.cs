@@ -38,6 +38,14 @@ public abstract class BaseProjectile : MonoBehaviour
     /// <summary>Fire a fixed-direction projectile (the aim is supplied by the type itself).</summary>
     public void Fire() => Fire(Vector2.zero);
 
+    /// <summary>Set the shared motion parameters. Used by builders/factories that
+    /// assemble a projectile in code rather than from Inspector values.</summary>
+    public void Configure(float projectileSpeed, float projectileLifetime)
+    {
+        speed = projectileSpeed;
+        lifetime = projectileLifetime;
+    }
+
     /// <summary>Map the requested aim to the actual travel direction. Default: use it as-is.</summary>
     protected virtual Vector2 ResolveDirection(Vector2 aim) => aim;
 
