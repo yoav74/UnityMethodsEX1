@@ -70,7 +70,7 @@ public class ProjectilePool : MonoBehaviour, IProjectilePool
     /// </summary>
     public static ProjectilePool FindFor<T>() where T : BaseProjectile
     {
-        foreach (ProjectilePool candidate in FindObjectsByType<ProjectilePool>(FindObjectsSortMode.None))
+        foreach (ProjectilePool candidate in FindObjectsByType<ProjectilePool>(FindObjectsInactive.Exclude))
             if (candidate.prefab is T)
                 return candidate;
 
